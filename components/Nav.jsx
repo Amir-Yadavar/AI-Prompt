@@ -23,7 +23,9 @@ const Nav = () => {
     console.log(provider);
   }, []);
 
-  const singOut = () => {};
+  const singOut = () => {
+  alert('ok')
+  };
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -46,11 +48,11 @@ const Nav = () => {
               Create Post
             </Link>
             <button
-              type="button"
+              // type="button"
               onClick={singOut}
               className="outline_btn cursor-pointer"
             >
-              Sign Out
+              Sign Outx
             </button>
 
             <Link href={"/profile"}>
@@ -73,7 +75,7 @@ const Nav = () => {
                   onClick={() => signIn(item.id)}
                   className="black_btn"
                 >
-                  \Sign in
+                  Sign in
                 </button>
               ))}
           </>
@@ -101,10 +103,36 @@ const Nav = () => {
               height={37}
               className="rounded-full"
               alt="amir-yadavar"
-              onClick={() => setToggleDropDown(!toggleDropDown)}
+              onClick={() => setToggleDropDown((prev) => !prev)}
             />
-
-            {/* <Link href={"/profile"}></Link> */}
+            {toggleDropDown && (
+              <div className="dropdown">
+                <Link
+                  href={"/profile"}
+                  className="dropdown_link"
+                  onClick={() => setToggleDropDown(false)}
+                >
+                  My Profile
+                </Link>
+                <Link
+                  href={"/create-prompt"}
+                  className="dropdown_link"
+                  onClick={() => setToggleDropDown(false)}
+                >
+                  Create Prompt
+                </Link>
+                <button
+                  type="button"
+                  className="mt-5 black_btn w-full"
+                  onClick={() => {
+                    setToggleDropDown(false);
+                    signOut();
+                  }}
+                >
+                  Sing Out
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <>
@@ -116,7 +144,7 @@ const Nav = () => {
                   onClick={() => signIn(item.id)}
                   className="black_btn"
                 >
-                  \Sign in
+                  Sign in
                 </button>
               ))}
           </>
